@@ -5,7 +5,7 @@ package marketwatch.com.app.marketwatch;
  */
 
 public class NewsData {
-    private String storename,buyprice,stoploss,target1,target2,target3,duration,type,create_date;
+    private String storename, buyprice, stoploss, target1, target2, target3, duration, type, create_date;
 
     public String getStorename() {
         return storename;
