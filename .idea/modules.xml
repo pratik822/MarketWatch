@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MarketWatch.iml" filepath="$PROJECT_DIR$/MarketWatch.iml" />
-      <module fileurl="file://C:\Users\Pratik\Downloads\MarketWatch\MarketWatch.iml" filepath="C:\Users\Pratik\Downloads\MarketWatch\MarketWatch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Pratik\Downloads\MarketWatch\app\app.iml" filepath="C:\Users\Pratik\Downloads\MarketWatch\app\app.iml" />
     </modules>
   </component>
 </project>
