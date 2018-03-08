@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     tools:context="marketwatch.com.app.marketwatch.MainActivity">
 
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="0dp"
@@ -23,6 +26,7 @@
 
 
     </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -48,10 +52,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="164dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recycleview"
+        app:layout_constraintBottom_toBottomOf="@+id/swiperefresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="@+id/recycleview"
+        app:layout_constraintStart_toStartOf="@+id/swiperefresh"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.22000003" />
 </android.support.constraint.ConstraintLayout>

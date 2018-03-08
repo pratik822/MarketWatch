@@ -1,6 +1,8 @@
 package marketwatch.com.app.marketwatch;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,10 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -21,23 +25,30 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView recycleview;
+    private SwipeRefreshLayout mySwipeRefreshLayout;
     List<NewsData> datalist = new ArrayList<>();
     List<NewsData> finaldatalist = new ArrayList<>();
     LinearLayoutManager mLayoutManager;
     private ProgressBar progressBar;
     private FirebaseAnalytics mFirebaseAnalytics;
     private static final String TAG = "MainActivity";
+    Boolean isRefresh=false;
+    boolean doubleBackToExitPressedOnce = false;
 
     private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+        mySwipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(this);
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -72,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     Adapter adapter = new Adapter(MainActivity.this, finaldatalist);
                     recycleview.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
+                    if(isRefresh==true){
+                        mySwipeRefreshLayout.setRefreshing(false);
+                    }
                 }
             }
 
@@ -81,5 +95,31 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void onRefresh() {
+        isRefresh=true;
+        getServerData();
+
     }
 }
