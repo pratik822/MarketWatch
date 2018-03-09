@@ -1,5 +1,6 @@
 package marketwatch.com.app.marketwatch;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
@@ -16,18 +17,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        if (remoteMessage.getData().size() > 0) {
-            Log.d("from", "Message data payload: " + remoteMessage.getData());
+
+            Log.d("firebase", "Message data payload: " + remoteMessage.getNotification().getBody());
             showSmallNotification(remoteMessage.getNotification().getBody());
 
 
-        }
+
     }
     private void showSmallNotification(String title) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setContentTitle(title).setSmallIcon(R.mipmap.ic_launcher);
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(title).setDefaults(Notification.DEFAULT_SOUND|Notification.DEFAULT_LIGHTS|Notification.DEFAULT_VIBRATE);
         NotificationManager mNotificationManager =
 
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
