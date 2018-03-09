@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         progressBar.setVisibility(View.INVISIBLE);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
+       // Log.d(TAG, "Refreshed token: " + refreshedToken);
         mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setOnRefreshListener(this);
         mAdView = (AdView) findViewById(R.id.adView);

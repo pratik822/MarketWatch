@@ -35,10 +35,10 @@ public class Splash extends AppCompatActivity {
         service.getData().enqueue(new Callback<List<NewsData>>() {
             @Override
             public void onResponse(Response<List<NewsData>> response, Retrofit retrofit) {
-                Log.d("responce", new Gson().toJson(response));
+             //   Log.d("responce", new Gson().toJson(response));
                 ServerData.setSetdata(response.body());
 
-                Log.d("responceserver", new Gson().toJson(ServerData.getSetdata()));
+              //  Log.d("responceserver", new Gson().toJson(ServerData.getSetdata()));
 
                 if (ServerData.getSetdata().size() > 0) {
                     Intent main = new Intent(Splash.this, MainActivity.class);
