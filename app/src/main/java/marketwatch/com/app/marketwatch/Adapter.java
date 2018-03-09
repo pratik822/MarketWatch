@@ -33,44 +33,47 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
     public void onBindViewHolder(Viewholder holder, int position) {
 
 
-            holder.tv_stockname.setText(mydata.get(position).getStorename());
-            holder.tv_posteddate.setText(mydata.get(position).getCreate_date());
-            holder.tv_buyprice.setText("BUY @" + mydata.get(position).getBuyprice());
-            if (mydata.get(position).getStoploss().isEmpty()) {
-                holder.tv_stoploss.setText("STOPLOSS " + "-");
-            } else {
-                holder.tv_stoploss.setText("STOPLOSS " + mydata.get(position).getStoploss());
-            }
+        holder.tv_stockname.setText(mydata.get(position).getStorename());
+        holder.tv_posteddate.setText(mydata.get(position).getCreate_date());
+        holder.tv_buyprice.setText("BUY @" + mydata.get(position).getBuyprice());
+        if (mydata.get(position).getStoploss().isEmpty()) {
+            holder.tv_stoploss.setText("STOPLOSS " + "-");
+        } else {
+            holder.tv_stoploss.setText("STOPLOSS " + mydata.get(position).getStoploss());
+        }
 
-            if(mydata.get(position).getTarget1().isEmpty()){
-                holder.tv_target_one.setText("-");
-            }else{
-                holder.tv_target_one.setText("@" + mydata.get(position).getTarget1());
-            }
+        if (mydata.get(position).getTarget1().isEmpty()) {
+            holder.tv_target_one.setText("-");
+        } else {
+            holder.tv_target_one.setText("@" + mydata.get(position).getTarget1());
+        }
 
-        if(mydata.get(position).getTarget2().isEmpty()){
+        if (mydata.get(position).getTarget2().isEmpty()) {
             holder.tv_target_two.setText("-");
-        }else{
+        } else {
             holder.tv_target_two.setText("@" + mydata.get(position).getTarget2());
         }
 
-        if(mydata.get(position).getTarget3().isEmpty()){
+        if (mydata.get(position).getTarget3().isEmpty()) {
             holder.tv_target_three.setText("-");
-        }else{
+        } else {
             holder.tv_target_three.setText("@" + mydata.get(position).getTarget3());
         }
 
 
-            if (mydata.get(position).getType().equalsIgnoreCase("buy")) {
-                holder.tv_type.setText("BUY CALL");
-            }
-            holder.tv_duration.setText(mydata.get(position).getDuration());
-            if (mydata.get(position).getDuration().contains("Hit")) {
-                holder.tv_duration.setBackgroundColor(ContextCompat.getColor(myctx, android.R.color.holo_red_dark));
-            } else {
-                holder.tv_duration.setBackgroundColor(ContextCompat.getColor(myctx, android.R.color.holo_green_dark));
-            }
+        if (mydata.get(position).getType().equalsIgnoreCase("buy")) {
+            holder.tv_type.setText("BUY CALL");
+        }
+        holder.tv_duration.setText(mydata.get(position).getDuration());
+        if (mydata.get(position).getDuration().contains("Hit")) {
+            holder.tv_duration.setBackgroundColor(ContextCompat.getColor(myctx, android.R.color.holo_red_dark));
+        } else if (mydata.get(position).getDuration().contains("days")) {
+            holder.tv_duration.setBackgroundColor(ContextCompat.getColor(myctx, android.R.color.darker_gray));
 
+        } else {
+            holder.tv_duration.setBackgroundColor(ContextCompat.getColor(myctx, android.R.color.holo_green_dark));
+
+        }
 
 
     }

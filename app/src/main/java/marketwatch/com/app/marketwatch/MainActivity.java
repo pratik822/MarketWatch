@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -25,7 +26,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView recycleview;
     private SwipeRefreshLayout mySwipeRefreshLayout;
     List<NewsData> datalist = new ArrayList<>();
@@ -34,27 +35,42 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private ProgressBar progressBar;
     private FirebaseAnalytics mFirebaseAnalytics;
     private static final String TAG = "MainActivity";
-    Boolean isRefresh=false;
+    Boolean isRefresh = false;
     boolean doubleBackToExitPressedOnce = false;
 
     private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Market Watch</font>"));
 
-        progressBar=(ProgressBar)findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
-        mySwipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setOnRefreshListener(this);
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        if (ServerData.getSetdata().size() > 0) {
+            setadapter();
+            for (int i = 0; i < ServerData.getSetdata().size(); i++) {
+                if (!ServerData.getSetdata().get(i).getBuyprice().equalsIgnoreCase("info") && !ServerData.getSetdata().get(i).getTarget1().equalsIgnoreCase("info")) {
+                    finaldatalist.add(ServerData.getSetdata().get(i));
+                }
+            }
 
-        getServerData();
-        setadapter();
+            if (finaldatalist.size() > 0) {
+                Adapter adapter = new Adapter(MainActivity.this, finaldatalist);
+                recycleview.setAdapter(adapter);
+
+            }
+        }
+
 
     }
 
@@ -63,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mLayoutManager = new LinearLayoutManager(this);
         recycleview.setLayoutManager(mLayoutManager);
         recycleview.setItemAnimator(new DefaultItemAnimator());
+
+
     }
 
     public void getServerData() {
@@ -83,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     Adapter adapter = new Adapter(MainActivity.this, finaldatalist);
                     recycleview.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
-                    if(isRefresh==true){
+                    if (isRefresh == true) {
                         mySwipeRefreshLayout.setRefreshing(false);
                     }
                 }
@@ -111,14 +129,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
 
     @Override
     public void onRefresh() {
-        isRefresh=true;
+        isRefresh = true;
         getServerData();
 
     }
