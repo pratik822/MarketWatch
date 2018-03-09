@@ -1,4 +1,6 @@
 {
+
+  //key store pw d@3
   "project_info": {
     "project_number": "247679535121",
     "firebase_url": "https://marketwatch-58004.firebaseio.com",
@@ -52,4 +54,5 @@
     }
   ],
   "configuration_version": "1"
+  //d@3 pw
 }
