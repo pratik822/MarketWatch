@@ -2,6 +2,7 @@ package marketwatch.com.app.marketwatch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
@@ -103,6 +106,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
             tv_duration = (TextView) itemView.findViewById(R.id.tv_status);
             iv_share = (ImageView) itemView.findViewById(R.id.iv_share);
             iv_share.setOnClickListener(new View.OnClickListener() {
+                FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(myctx);
+
                 @Override
                 public void onClick(View view) {
                     String msg = mydata.get(getAdapterPosition()).getStorename();
@@ -122,7 +127,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
                         msg += " target3@" + mydata.get(getAdapterPosition()).getTarget3() + "";
                     }
 
-                    Log.d("msg",msg);
+                    Log.d("msg", msg);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Share", msg);
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
 
 
                     getBitmapFromView(msg);
