@@ -115,17 +115,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
                         msg += " Buy@" + mydata.get(getAdapterPosition()).getBuyprice() + "";
                     }
                     if (!mydata.get(getAdapterPosition()).getStoploss().isEmpty() || mydata.get(getAdapterPosition()).getStoploss().isEmpty()) {
-                        msg += " stoploss@" + mydata.get(getAdapterPosition()).getStoploss() + "";
+                        msg += " stoploss@" + mydata.get(getAdapterPosition()).getStoploss() + " ";
                     }
                     if (!mydata.get(getAdapterPosition()).getTarget1().isEmpty() || !mydata.get(getAdapterPosition()).getTarget1().contains("-")) {
-                        msg += " target1@" + mydata.get(getAdapterPosition()).getTarget1() + "";
+                        msg += " target1@" + mydata.get(getAdapterPosition()).getTarget1() + " ";
                     }
                     if (!mydata.get(getAdapterPosition()).getTarget2().isEmpty() || !mydata.get(getAdapterPosition()).getTarget2().contains("-")) {
-                        msg += " target2@" + mydata.get(getAdapterPosition()).getTarget2() + "";
+                        msg += " target2@" + mydata.get(getAdapterPosition()).getTarget2() + " ";
                     }
                     if (!mydata.get(getAdapterPosition()).getTarget3().isEmpty() || !mydata.get(getAdapterPosition()).getTarget3().contains("-")) {
-                        msg += " target3@" + mydata.get(getAdapterPosition()).getTarget3() + "";
+                        msg += " target3@" + mydata.get(getAdapterPosition()).getTarget3() + " ";
                     }
+                    msg +=" for get updated in stock market download our app https://play.google.com/store/apps/details?id=marketwatch.com.app.marketwatch";
 
                     Log.d("msg", msg);
                     Bundle bundle = new Bundle();
