@@ -38,6 +38,7 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
     Date date;
     private FirebaseRecyclerAdapter<Message, ChatViewHolder> adapter;
     private FirebaseAnalytics mFirebaseAnalytics;
+    ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
 
         edtMessage = (EditText) findViewById(R.id.edt_message);
         rvMessage = (RecyclerView) findViewById(R.id.rv_chat);
+        progress=(ProgressBar)findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
         rvMessage.setHasFixedSize(true);
         linearLayoutManager =
                 new LinearLayoutManager(Chat_activity.this, LinearLayoutManager.VERTICAL, false);
@@ -87,7 +90,7 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
                 viewHolder.tvEmail.setText(model.username);
                 viewHolder.tv_ago.setText(ago.timeAgo(new Date(model.times)));
                 Log.d("mydates", ago.timeAgo(new Date(model.times)));
-
+                progress.setVisibility(View.GONE);
             }
         };
 
