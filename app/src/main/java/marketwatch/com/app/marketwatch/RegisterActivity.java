@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btnRegister;
     private Button btn_login;
     private ProgressBar progress;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     //initial
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
@@ -35,18 +37,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Register</font>"));
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         //initial
         mFirebaseAuth = FirebaseAuth.getInstance();
         setupUI();
 
         AppPreference mAppPreference = new AppPreference(this);
         if (!TextUtils.isEmpty(mAppPreference.getEmail())) {
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            startActivity(new Intent(RegisterActivity.this, Chat_activity.class));
             finish();
         }
 

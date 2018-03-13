@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,12 +42,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseDatabase mFirebaseDatabase;
     List<User> list = new ArrayList<>();
     AppPreference mAppPreference;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Login</font>"));
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         setContentView(R.layout.activity_login);
         mAppPreference = new AppPreference(LoginActivity.this);
         setupUI();
@@ -124,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                                     progressBar.setVisibility(View.INVISIBLE);
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, Chat_activity.class));
                                     finish();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();

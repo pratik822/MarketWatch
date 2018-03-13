@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="firebase.com.labs.ramdani.mygroupchat.MainActivity">
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_chat"
@@ -45,7 +45,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/send"
+            android:src="@drawable/ic_action_name"
             android:layout_gravity="bottom"
             android:layout_marginEnd="13dp"
             android:layout_marginRight="13dp"
