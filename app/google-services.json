@@ -1,6 +1,4 @@
 {
-
-  //key store pw d@3
   "project_info": {
     "project_number": "247679535121",
     "firebase_url": "https://marketwatch-58004.firebaseio.com",
@@ -16,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "247679535121-th2gq4ngmsga71fkfshg3h3vivsmkbbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "marketwatch.com.app.marketwatch",
+            "certificate_hash": "14d6e52a066cad567bf38e9d81172b5af45b52e2"
+          }
+        },
         {
           "client_id": "247679535121-28k034e02l87rih6k912iibdsqbv9nvc.apps.googleusercontent.com",
           "client_type": 1,
@@ -54,5 +60,4 @@
     }
   ],
   "configuration_version": "1"
-  //d@3 pw
 }

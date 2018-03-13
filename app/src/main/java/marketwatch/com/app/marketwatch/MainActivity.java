@@ -1,5 +1,6 @@
 package marketwatch.com.app.marketwatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -72,6 +76,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_chat:
+                Intent pass=new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(pass);
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setadapter() {
