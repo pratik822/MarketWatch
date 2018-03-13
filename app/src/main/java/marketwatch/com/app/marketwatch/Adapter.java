@@ -130,8 +130,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
 
                     Log.d("msg", msg);
                     Bundle bundle = new Bundle();
-                    bundle.putString("Share", msg);
-                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                    bundle.putString("share", mydata.get(getAdapterPosition()).getStorename());
+                    mFirebaseAnalytics.logEvent("share", bundle);
 
 
                     getBitmapFromView(msg);
