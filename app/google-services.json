@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "247679535121-9u7t91e5vtbhdpg28to31boqirtua0rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "marketwatch.com.app.marketwatch",
+            "certificate_hash": "738975cba8cea271c1b3dce547fb0419b5ae5149"
+          }
+        },
+        {
           "client_id": "247679535121-th2gq4ngmsga71fkfshg3h3vivsmkbbh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

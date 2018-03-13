@@ -45,6 +45,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Chat_activity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b3e24788c7d8fd48587e27a8ede4d9b80ce710ab" />
     </application>
 
 </manifest>
