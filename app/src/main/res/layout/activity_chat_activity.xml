@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
      >
@@ -15,6 +16,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+             ></com.google.android.gms.ads.AdView>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_chat"
@@ -41,7 +53,7 @@
                 android:layout_toLeftOf="@+id/btn_send"
                 android:layout_toStartOf="@+id/btn_send"
                 android:background="@android:color/transparent"
-                android:hint="Send message"
+                android:hint="Enter message here"
                 android:inputType="textCapSentences"
                 android:maxLines="4"
                 android:textSize="16sp" />

@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -33,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +46,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+
         //initial
         mFirebaseAuth = FirebaseAuth.getInstance();
         setupUI();
-
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         AppPreference mAppPreference = new AppPreference(this);
         if (!TextUtils.isEmpty(mAppPreference.getEmail())) {
             startActivity(new Intent(RegisterActivity.this, Chat_activity.class));
@@ -61,20 +67,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edtEmail = (EditText) findViewById(R.id.edt_email);
         btnRegister = (Button) findViewById(R.id.btn_register);
         progress = (ProgressBar) findViewById(R.id.progress);
+        mAdView = (AdView) findViewById(R.id.adView);
         progress.setVisibility(View.INVISIBLE);
 
         btnRegister.setOnClickListener(this);
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
     }
+
     private void createNewUser(FirebaseUser userFromRegistration) {
-        User user=new User();
+        User user = new User();
         String email = userFromRegistration.getEmail();
-        String userId =edtName.getText().toString();
+        String userId = edtName.getText().toString();
         user.setEmail(email);
         user.setUserId(userId);
         mDatabaseReference.child("users").push().setValue(user);
     }
+
     @Override
     public void onClick(View v) {
 

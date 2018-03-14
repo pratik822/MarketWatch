@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -39,6 +41,7 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
     private FirebaseRecyclerAdapter<Message, ChatViewHolder> adapter;
     private FirebaseAnalytics mFirebaseAnalytics;
     ProgressBar progress;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,9 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_chat_activity);
         setupUI();
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         init();
         intiRecycle();
@@ -61,6 +67,7 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
         edtMessage = (EditText) findViewById(R.id.edt_message);
         rvMessage = (RecyclerView) findViewById(R.id.rv_chat);
         progress=(ProgressBar)findViewById(R.id.progress);
+        mAdView = (AdView) findViewById(R.id.adView);
         progress.setVisibility(View.VISIBLE);
         rvMessage.setHasFixedSize(true);
         linearLayoutManager =
@@ -82,7 +89,7 @@ public class Chat_activity extends AppCompatActivity implements View.OnClickList
                 Message.class,
                 R.layout.item_row_chat,
                 ChatViewHolder.class,
-                mDatabaseReference.child("chat")
+                mDatabaseReference.child("chat").limitToLast(400)
         ) {
             @Override
             protected void populateViewHolder(ChatViewHolder viewHolder, Message model, int position) {

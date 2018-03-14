@@ -16,23 +16,23 @@ repositories {
 
 
 android {
-    /*  signingConfigs {
+     signingConfigs {
         config {
             keyAlias 'key'
             keyPassword 'dhoom@123'
             storeFile file('C:/Users/Pratik/Downloads/mykey.jks')
             storePassword 'dhoom@123'
         }
-    }*/
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "marketwatch.com.app.marketwatch"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.1"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        /*   signingConfig signingConfigs.config*/
+        versionCode 4
+        versionName "1.3"
+
+           signingConfig signingConfigs.config
     }
     buildTypes {
         release {
@@ -41,7 +41,7 @@ android {
         }
         debug {
             debuggable false
-            /* signingConfig signingConfigs.config*/
+             signingConfig signingConfigs.config
         }
     }
     productFlavors {
