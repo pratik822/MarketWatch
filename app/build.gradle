@@ -19,9 +19,9 @@ android {
      signingConfigs {
         config {
             keyAlias 'key'
-            keyPassword 'dhoom@123'
+            keyPassword ''
             storeFile file('C:/Users/Pratik/Downloads/mykey.jks')
-            storePassword 'dhoom@123'
+            storePassword ''
         }
     }
     compileSdkVersion 26
