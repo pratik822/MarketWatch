@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="5dp"
+    android:foreground="?android:selectableItemBackground"
+    android:clickable="true"
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -18,7 +20,7 @@
             android:id="@+id/tv_stockname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="#ff4b5cbe"
             android:textSize="20sp"
             android:textStyle="bold"
             android:text="Indiabulls housing finance limited" />
@@ -33,6 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#ffa9a9a9"
+                android:textSize="12sp"
                 android:text="Posted on 5 days ago" />
 
             <TextView
@@ -56,7 +60,7 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textColor="@android:color/holo_green_dark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:text="Buy Price @1275" />
 
@@ -67,7 +71,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:text="Stoploss @1255" />
         </LinearLayout>
@@ -93,30 +97,33 @@
             <LinearLayout
                 android:layout_width="0.0dip"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip"
-                android:layout_marginTop="10.0dip"
                 android:layout_weight="1.0"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:text="Target 1"
-                    android:textColor="#ff212121"
-                    android:textSize="11.0dip" />
+                    android:padding="2dp"
+                    android:gravity="center"
+                    android:background="#ff448aff"
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_target_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6.0dip"
+                    android:layout_margin="8dp"
                     android:layout_weight="1.0"
+                    android:gravity="center"
                     android:text="450"
                     android:textColor="#ff000000"
-                    android:textSize="14.0dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -127,29 +134,32 @@
             <LinearLayout
                 android:layout_width="0.0dip"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip"
-                android:layout_marginTop="10.0dip"
                 android:layout_weight="1.0"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:text="Target 2"
-                    android:textColor="#ff212121"
-                    android:textSize="11.0dip" />
+                    android:padding="2dp"
+                    android:gravity="center"
+                    android:background="#ff4b5cbe"
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_target_two"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6.0dip"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
                     android:layout_weight="1.0"
                     android:text="4000"
                     android:textColor="#ff000000"
-                    android:textSize="14.0dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -160,29 +170,32 @@
             <LinearLayout
                 android:layout_width="0.0dip"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip"
-                android:layout_marginTop="10.0dip"
                 android:layout_weight="1.0"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:text="Target 3"
-                    android:textColor="#ff212121"
-                    android:textSize="11.0dip" />
+                    android:textColor="#ffffffff"
+                    android:background="#ff448aff"
+                    android:padding="2dp"
+                    android:gravity="center"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_target_three"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6.0dip"
+                    android:layout_margin="8dp"
                     android:layout_weight="1.0"
+                    android:gravity="center"
                     android:text="-"
                     android:textColor="#ff000000"
-                    android:textSize="14.0dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 

@@ -3,6 +3,7 @@ package marketwatch.com.app.marketwatch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
@@ -26,9 +29,10 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView recycleview;
@@ -49,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Market Watch</font>"));
+
+        Log.d("FCMToken", "token "+ FirebaseInstanceId.getInstance().getToken());
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
@@ -110,9 +116,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     public void getServerData() {
         RetrofitService service = RetrofitClient.getApiService();
+
         service.getData().enqueue(new Callback<List<NewsData>>() {
             @Override
-            public void onResponse(Response<List<NewsData>> response, Retrofit retrofit) {
+            public void onResponse(Call<List<NewsData>> call, Response<List<NewsData>> response) {
                 Log.d("responce", new Gson().toJson(response));
                 datalist = response.body();
 
@@ -120,24 +127,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     if (!datalist.get(i).getBuyprice().equalsIgnoreCase("info") && !datalist.get(i).getTarget1().equalsIgnoreCase("info")) {
                         finaldatalist.add(datalist.get(i));
                     }
-                }
-
-                if (finaldatalist.size() > 0) {
-                    Adapter adapter = new Adapter(MainActivity.this, finaldatalist);
-                    recycleview.setAdapter(adapter);
-                    progressBar.setVisibility(View.GONE);
-                    if (isRefresh == true) {
-                        mySwipeRefreshLayout.setRefreshing(false);
+                    if (finaldatalist.size() > 0) {
+                        Adapter adapter = new Adapter(MainActivity.this, finaldatalist);
+                        recycleview.setAdapter(adapter);
+                        progressBar.setVisibility(View.GONE);
+                        if (isRefresh == true) {
+                            mySwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                t.printStackTrace();
-                progressBar.setVisibility(View.GONE);
+            public void onFailure(Call<List<NewsData>> call, Throwable t) {
+
             }
         });
+
+
     }
 
     @Override

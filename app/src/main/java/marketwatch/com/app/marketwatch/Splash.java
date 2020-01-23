@@ -7,14 +7,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.gson.Gson;
+
 
 import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class Splash extends AppCompatActivity {
 
@@ -35,14 +36,11 @@ public class Splash extends AppCompatActivity {
 
     public void getServerData() {
         RetrofitService service = RetrofitClient.getApiService();
+
         service.getData().enqueue(new Callback<List<NewsData>>() {
             @Override
-            public void onResponse(Response<List<NewsData>> response, Retrofit retrofit) {
-             //   Log.d("responce", new Gson().toJson(response));
+            public void onResponse(Call<List<NewsData>> call, Response<List<NewsData>> response) {
                 ServerData.setSetdata(response.body());
-
-              //  Log.d("responceserver", new Gson().toJson(ServerData.getSetdata()));
-
                 if (ServerData.getSetdata().size() > 0) {
                     Intent main = new Intent(Splash.this, MainActivity.class);
                     startActivity(main);
@@ -51,10 +49,11 @@ public class Splash extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                t.printStackTrace();
+            public void onFailure(Call<List<NewsData>> call, Throwable t) {
 
             }
         });
+
+
     }
 }
