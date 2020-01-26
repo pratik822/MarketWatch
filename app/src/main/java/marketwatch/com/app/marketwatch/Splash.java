@@ -50,7 +50,7 @@ public class Splash extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<NewsData>> call, Throwable t) {
-
+                Toast.makeText(Splash.this,"Server error,Please try again later",Toast.LENGTH_LONG).show();
             }
         });
 

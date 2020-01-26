@@ -18,6 +18,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +33,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     boolean doubleBackToExitPressedOnce = false;
 
     private AdView mAdView;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,60 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Market Watch</font>"));
 
         Log.d("FCMToken", "token "+ FirebaseInstanceId.getInstance().getToken());
+        queue = Volley.newRequestQueue(MainActivity.this);
+
+
+
+
+        StringRequest jsonrequest = new StringRequest(Request.Method.POST, "http://marketwatchnew.000webhostapp.com/marketwatch/stockmarket/fcmTockengenrate.php", new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(MainActivity.this,response.toString(),Toast.LENGTH_LONG).show();
+
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("getmyresponce", error.getMessage());
+            }
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("fcmkey",FirebaseInstanceId.getInstance().getToken());
+
+                Log.d("getParams", params.toString());
+                return params;
+            }
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<String, String>();
+                header.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                return header;
+            }
+
+        };
+
+        queue.add(jsonrequest);
+
+
+
+/*       RetrofitService service = RetrofitClient.getApiService();
+        service.sendTocken(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("myresponce",response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("myresponce",t.getMessage());
+            }
+        });*/
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
